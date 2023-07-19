@@ -17,6 +17,6 @@ describe('filling form', () => {
     require('./fields/Коментар_field.cy')
     require('./fields/Відповідальний_field.cy')
     require('./fields/modal_Пошук_Контрагенти_field.cy')
-
-
+    require('./fields/Протокол_field.cy')
+    require('./fields/Дані про доставку_field.cy')
 })

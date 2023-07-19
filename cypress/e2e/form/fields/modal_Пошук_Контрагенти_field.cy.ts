@@ -4,10 +4,10 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#form > div > div:nth-child(1) > div > div.row > div:nth-child(4) > div > a').click()
 
     })
-    // after(() => {
-    //     cy.get('#modal-default > div > div > div.modal-header > button > span').first().click()
-    //     cy.get('#modal-default').should('not.be.visible')
-    // })
+    after(() => {
+        cy.get('#modal-default > div > div > div.modal-header > button > span').first().click()
+        cy.get('#modal-default').should('not.be.visible')
+    })
     it('modal is opened', () => {
         cy.get('#modal-default').should('be.visible')
         cy.get('#modal-default > div > div > div.modal-header > h4 ')
@@ -259,13 +259,13 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#kontragents > thead > tr > th:nth-child(1)').type(example)
         cy.wait('@request')
         cy.get('@requestSpy')
-            // .should('be.calledOnce')
         cy.get('#kontragents > tbody > tr').each(row => {
             cy.wrap(row).find('td:nth-child(1)').first().invoke('text').should('match', new RegExp(example, 'i'))
         })
         cy.get('#modal-default').should('be.visible')
             .get('#kontragents > thead > tr > th:nth-child(1)')
             .type('{selectAll}{backspace}')
+            cy.wait('@request')
     })
     it('ПІБ/Назва', () => {
         const example = 'ВЛАСОВ'
@@ -285,14 +285,8 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#modal-default').should('be.visible')
             .get('#kontragents > thead > tr > th:nth-child(1)')
             .type('{selectAll}{backspace}')
-        //   .parent()
-        // .should('be.visible')
-        //   .contains('ПІБ/Назва')
-        //   .parent()
-        // .should('be.visible')
-        // cy.get('#kontragents > thead > tr > th:nth-child(1)').type('Власов Михайло').wait(3000).type('{selectAll}{backspace}')
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6) > div > a.btn.btn-default.btn-xs').click()
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6)').click()
+            cy.wait('@request')
+
     })
     it('Номер телефону', () => {
         const example = '099'
@@ -305,19 +299,14 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#kontragents > thead > tr > th:nth-child(2)').type(example)
         cy.wait('@request')
         cy.get('@requestSpy')
-            // .should('be.calledOnce')
+            .should('be.calledOnce')
         cy.get('#kontragents > tbody > tr').each(row => {
             cy.wrap(row).find('td:nth-child(2)').first().invoke('text').should('match', new RegExp(example))
         })
         cy.get('#modal-default').should('be.visible')
             .get('#kontragents > thead > tr > th:nth-child(2)')
             .type('{selectAll}{backspace}')
-        //   .contains('Номер телефону')
-        //   .parent()
-        // .should('be.visible')
-        // cy.get('#kontragents > thead > tr > th:nth-child(2)').type('099').type('{selectAll}{backspace}')
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6) > div > a.btn.btn-default.btn-xs').click()
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6)').click()
+            cy.wait('@request')
     })
     it('Серія та номер паспорта', () => {
         const example = '435195'
@@ -330,19 +319,14 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#kontragents > thead > tr > th:nth-child(3)').type(example)
         cy.wait('@request')
         cy.get('@requestSpy')
-            // .should('be.calledOnce')
+            .should('be.calledOnce')
         cy.get('#kontragents > tbody > tr').each(row => {
             cy.wrap(row).find('td:nth-child(3)').first().invoke('text').should('match', new RegExp(example))
         })
         cy.get('#modal-default').should('be.visible')
             .get('#kontragents > thead > tr > th:nth-child(3)')
             .type('{selectAll}{backspace}')
-        //   .contains('Серія та номер паспорта')
-        //   .parent()
-        // .should('be.visible')
-        // cy.get('#kontragents > thead > tr > th:nth-child(3)').type('СЮ 435195').wait(3000).type(" ").type(" ").type(" ")
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6) > div > a.btn.btn-default.btn-xs').click()
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6)').click()
+        cy.wait('@request')    
     })
     it('Код', () => {
         const example = '24921'
@@ -355,28 +339,21 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#kontragents > thead > tr > th:nth-child(4)').type(example)
         cy.wait('@request')
         cy.get('@requestSpy')
-            // .should('be.calledOnce')
+            .should('be.calledOnce')
         cy.get('#kontragents > tbody > tr').each(row => {
             cy.wrap(row).find('td:nth-child(4)').first().invoke('text').should('match', new RegExp(example))
         })
-        // cy.get('#kontragents > thead > tr > th:nth-child(4)').type(" ")
-        // cy.get('#kontragents > thead > tr > th:nth-child(4)').type(" ")
-        // cy.get('@requestSpy')
-        //     .should('be.calledTwice')
+        cy.get('#kontragents > thead > tr > th:nth-child(4)').type(" ")
+        cy.get('#kontragents > thead > tr > th:nth-child(4)').type(" ")
+        cy.get('@requestSpy')
+            .should('be.calledTwice')
         cy.get('#modal-default').should('be.visible')
             .get('#kontragents > thead > tr > th:nth-child(4)')
             .type('{selectAll}{backspace}')
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td').each(item => {
-        //     cy.wrap(item).invoke('text').then(res => {
-        //         cy.log(res)
-        //     })
-        // })
-        // .wait(3000).type(" ").type(" ").type(" ")
-        // .type('{selectAll}{backspace}')
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6) > div > a.btn.btn-default.btn-xs').click()
-        // cy.get('#kontragents > tbody > tr:nth-child(1) > td:nth-child(6)').click()
+            cy.wait('@request')
+    
     })
-    it.only('ІПН/ЄГРПОУ', () => {
+    it('ІПН/ЄГРПОУ', () => {
         const example = '9679'
         cy.get('#modal-default').contains('ІПН/ЄГРПОУ').should('be.visible')
         cy.intercept('POST', '**/find-customer-by-data',
@@ -394,6 +371,7 @@ describe('modal Пошук: Контрагенти', () => {
         cy.get('#modal-default').should('be.visible')
             .get('#kontragents > thead > tr > th:nth-child(5)')
             .type('{selectAll}{backspace}')
+            cy.wait('@request')
     })
     // it('Вибрати', () => {
     //     cy.get('#modal-default').should('be.visible')
